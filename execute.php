@@ -111,16 +111,15 @@ if(substr($domandaL,0,10) == 'iscrizione' or substr($domandaL,0,11) == '/iscrizi
 	
 	if($nome == '' or $cognome == '')
 	{
+		$risposta = trim('Mi dispiace non ti ho riconosciuto. Ho letto bene il tuo codice per Telegram? Mi risulta >>'.$codice.'<<');
+	}
+	else
+	{
 		switch($idcord)
 		{
 			case '1': $cord = 'Coordinamento di Lecce'; break;
 			case '6': $cord = 'Coordinamento di Taranto'; break;
 		}
-		
-		$risposta = trim('Mi dispiace non ti ho riconosciuto. Ho letto bene il tuo codice per Telegram? Mi risulta >>'.$codice.'<<');
-	}
-	else
-	{
 		$risposta = trim('Ciao, ti ho riconosciuto, sei proprio '.$nome.' '.$cognome.' del '.$cord.'! D\'ora in poi saprò come chiamarti quando servira.
 		
 		Se lo volessi comunicare direttamente in segreteria il tuo codice telegram è '.$chatId);
