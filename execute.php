@@ -106,12 +106,22 @@ if(substr($domandaL,0,10) == 'iscrizione' or substr($domandaL,0,11) == '/iscrizi
 	$data = $array2[0];
 	$nome = $data["nome"];
 	$cognome = $data["cognome"];
+	$idcord = $data["idcord"];
+	
 	
 	if($nome == '' or $cognome == '')
+	{
+		switch($idcord)
+		{
+			case '1': $cord = 'Coordinamento di Lecce'; break;
+			case '6': $cord = 'Coordinamento di Taranto'; break;
+		}
+		
 		$risposta = trim('Mi dispiace non ti ho riconosciuto. Ho letto bene il tuo codice per Telegram? Mi risulta >>'.$codice.'<<');
+	}
 	else
 	{
-		$risposta = trim('Ciao, ti ho riconosciuto, sei proprio '.$nome.' '.$cognome.'! D\'ora in poi saprò come chiamarti quando servira.
+		$risposta = trim('Ciao, ti ho riconosciuto, sei proprio '.$nome.' '.$cognome.' del '.$cord.'! D\'ora in poi saprò come chiamarti quando servira.
 		
 		Se lo volessi comunicare direttamente in segreteria il tuo codice telegram è '.$chatId);
 		$urlUserAppr = 'http://www.cvpc.lecce.it/augusto/api/reguser.php?c='.$codice.'&chatid='.$chatId;
