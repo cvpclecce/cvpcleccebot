@@ -93,12 +93,12 @@ if($domandaL == 'che ore sono?' or $domandaL == 'mi dici l\'orario?' or $domanda
 if(substr($domandaL,0,10) == 'iscrizione' or substr($domandaL,0,11) == '/iscrizione')
 {
 	if(substr($domandaL,0,1) == '/')
-		$codsocio = substr($domandaL,12);
+		$codice = substr($domandaL,12);
 	else
-		$codsocio = substr($domandaL,11);
+		$codice = substr($domandaL,11);
 	
-	$codsocio = trim($codsocio);
-	$urlUser = 'http://www.protezionecivilecasarano.org/gestnew/api/read_user.php?codsocio='.$codsocio;
+	$codsocio = trim($codice);
+	$urlUser = 'http://www.cvpc.lecce.it/augusto/api/readuser.php?c='.$codice;
 	$json = file_get_contents($urlUser);
 	$obj = json_decode($json,true);
 	$array = $obj[1];
@@ -108,13 +108,13 @@ if(substr($domandaL,0,10) == 'iscrizione' or substr($domandaL,0,11) == '/iscrizi
 	$cognome = $data["cognome"];
 	
 	if($nome == '' or $cognome == '')
-		$risposta = trim('Mi dispiace non ti ho riconosciuto. Ho letto bene il tuo codice socio? Mi risulta >>'.$codsocio.'<<');
+		$risposta = trim('Mi dispiace non ti ho riconosciuto. Ho letto bene il tuo codice per Telegram? Mi risulta >>'.$codice.'<<');
 	else
 	{
-		$risposta = trim('Ciao, ti ho riconosciuto, sei proprio '.$nome.' '.$cognome.'! D\'ora in poi saprò come chiamarti quando mi servirai.
+		$risposta = trim('Ciao, ti ho riconosciuto, sei proprio '.$nome.' '.$cognome.'! D\'ora in poi saprò come chiamarti quando servira.
 		
 		Se lo volessi comunicare direttamente in segreteria il tuo codice telegram è '.$chatId);
-		$urlUserAppr = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_user.php?codsocio='.$codsocio.'&chatid='.$chatId;
+		$urlUserAppr = 'http://www.cvpc.lecce.it/augusto/api/reguser.php?c='.$codice.'&chatid='.$chatId;
 		$json = file_get_contents($urlUserAppr);
 	}
 	
